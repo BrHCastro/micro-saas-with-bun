@@ -24,3 +24,9 @@ x-user-id: 7875680d-87d0-462d-8564-fb914a7b2623
     "title": "New task added",
     "description": "dolore elit dolor laborum cupidatat do anim adipisicing enim in exercitation cillum"
 }
+
+###
+
+POST http://localhost:3333/checkout HTTP/1.1
+content-type: application/json
+x-user-id: 7875680d-87d0-462d-8564-fb914a7b2623
