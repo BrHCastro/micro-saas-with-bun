@@ -11,6 +11,29 @@ export async function createTodoController(
     description: z.string().optional(),
   })
 
+  const requestHeaders = z.object({
+    'x-user-id': z.string(),
+  })
+
+  const header = requestHeaders.safeParse(request.headers)
+
+  if (header.success === false) {
+    return response.status(403).json({ error: 'User ID not provided.' })
+  }
+
+  const user = await prisma.user.findUnique({
+    select: {
+      id: true,
+    },
+    where: {
+      id: header.data['x-user-id'],
+    },
+  })
+
+  if (!user) {
+    return response.status(403).json({ error: 'Forbidden.' })
+  }
+
   const body = requestBodyParams.safeParse(request.body)
 
   if (body.success === false) {
@@ -21,6 +44,7 @@ export async function createTodoController(
 
   await prisma.todo.create({
     data: {
+      userId: user.id,
       title,
       description,
     },

@@ -2,7 +2,7 @@ GET http://localhost:3333/users HTTP/1.1
 
 ###
 
-GET http://localhost:3333/users/1593fbca-ec9f-4376-91dd-fd41ad4b92d1 HTTP/1.1
+GET http://localhost:3333/users/7875680d-87d0-462d-8564-fb914a7b2623 HTTP/1.1
 
 ###
 
@@ -10,16 +10,17 @@ POST http://localhost:3333/users HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Janne Doe",
-    "email": "janne.doe@example.com"
+    "name": "John Doe",
+    "email": "john.doe@example.com"
 }
 
 ###
 
-POST http://localhost:3333/todo HTTP/1.1
+POST http://localhost:3333/todos HTTP/1.1
 content-type: application/json
+x-user-id: 7875680d-87d0-462d-8564-fb914a7b2623
 
 {
-    "title": "Second note!!!",
+    "title": "New task added",
     "description": "dolore elit dolor laborum cupidatat do anim adipisicing enim in exercitation cillum"
 }

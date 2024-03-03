@@ -3,6 +3,6 @@ import { createTodoController } from '../controllers/todo.controller'
 
 const router = express.Router()
 
-router.post('/todo', createTodoController)
+router.post('/todos', createTodoController)
 
 export { router as todoRouter }
