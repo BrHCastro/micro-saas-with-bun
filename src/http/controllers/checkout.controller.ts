@@ -17,6 +17,8 @@ export async function checkoutController(request: Request, response: Response) {
   const user = await prisma.user.findUnique({
     select: {
       id: true,
+      name: true,
+      email: true,
     },
     where: {
       id: header.data['x-user-id'],
@@ -27,7 +29,11 @@ export async function checkoutController(request: Request, response: Response) {
     return response.status(403).json({ error: 'Forbidden.' })
   }
 
-  const checkout = await createCheckoutSession(user.id)
+  const checkout = await createCheckoutSession({
+    id: user.id,
+    name: user.name,
+    email: user.email,
+  })
 
   return response.json(checkout)
 }

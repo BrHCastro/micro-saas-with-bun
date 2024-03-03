@@ -7,15 +7,27 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum SubscriptionStatus {
+  active
+  canceled
+  incomplete
+  incomplete_expired
+  past_due
+  paused
+  trialing
+  unpaid
+}
+
 model User {
-  id                   String   @id @default(uuid())
-  stripeCustomerId     String?  @map("stripe_customer_id")
-  stripeSubscriptionId String?  @map("stripe_subscription_id")
-  name                 String
-  email                String   @unique
-  createdAt            DateTime @default(now()) @map("created_at")
-  updatedAt            DateTime @updatedAt
-  todos                Todo[]
+  id                       String              @id @default(uuid())
+  stripeCustomerId         String?             @map("stripe_customer_id")
+  stripeSubscriptionId     String?             @map("stripe_subscription_id")
+  stripeSubscriptionStatus SubscriptionStatus? @map("stripe_subscription_status")
+  name                     String
+  email                    String              @unique
+  createdAt                DateTime            @default(now()) @map("created_at")
+  updatedAt                DateTime            @updatedAt
+  todos                    Todo[]
 
   @@map("users")
 }

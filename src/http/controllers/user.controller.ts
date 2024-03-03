@@ -1,6 +1,7 @@
 import type { Request, Response } from 'express'
 import { prisma } from '../../lib/prisma'
 import { z } from 'zod'
+import { createStripeCustomer } from '../../lib/stripe'
 
 export async function listUserController(request: Request, response: Response) {
   const users = await prisma.user.findMany()
@@ -61,10 +62,16 @@ export async function createUserController(
     return response.status(409).json({ error: 'Email already taken.' })
   }
 
+  const stripeCustomer = await createStripeCustomer({
+    name,
+    email,
+  })
+
   await prisma.user.create({
     data: {
       email,
       name,
+      stripeCustomerId: stripeCustomer.id,
     },
   })
 

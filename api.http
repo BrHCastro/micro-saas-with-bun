@@ -2,7 +2,7 @@ GET http://localhost:3333/users HTTP/1.1
 
 ###
 
-GET http://localhost:3333/users/7875680d-87d0-462d-8564-fb914a7b2623 HTTP/1.1
+GET http://localhost:3333/users/54d535ef-5ecf-4685-aa52-2bd2d330d0c7 HTTP/1.1
 
 ###
 
@@ -10,15 +10,15 @@ POST http://localhost:3333/users HTTP/1.1
 content-type: application/json
 
 {
-    "name": "John Doe",
-    "email": "john.doe@example.com"
+    "name": "Jane Doe",
+    "email": "jane.doe@gmail.com"
 }
 
 ###
 
 POST http://localhost:3333/todos HTTP/1.1
 content-type: application/json
-x-user-id: 7875680d-87d0-462d-8564-fb914a7b2623
+x-user-id: a928e75d-6d75-4f27-88d2-d154daece1da
 
 {
     "title": "New task added",
@@ -29,4 +29,4 @@ x-user-id: 7875680d-87d0-462d-8564-fb914a7b2623
 
 POST http://localhost:3333/checkout HTTP/1.1
 content-type: application/json
-x-user-id: 7875680d-87d0-462d-8564-fb914a7b2623
+x-user-id: b16a1fa7-ef9e-41ff-bc95-fefe1fbb4c22

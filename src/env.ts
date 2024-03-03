@@ -6,6 +6,7 @@ const envSchema = z.object({
   STRIPE_PRO_PRICE_ID: z.string(),
   STRIPE_SUCCESS_URL: z.string().url(),
   STRIPE_CANCEL_URL: z.string().url(),
+  STRIPE_WEBHOOK_SECRET: z.string(),
 })
 
 const _env = envSchema.safeParse(process.env)
