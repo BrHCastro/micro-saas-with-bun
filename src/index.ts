@@ -1,23 +1,14 @@
 import express from 'express'
-import {
-  createUserController,
-  findUserByIdController,
-  listUserController,
-} from './controllers/user.controller'
-import { createTodoController } from './controllers/todo.controller'
+
+import { userRouter } from './http/routes/user'
+import { todoRouter } from './http/routes/todo'
 
 const app = express()
 const port = 3333
 
 app.use(express.json())
-
-app.get('/users', listUserController)
-
-app.get('/users/:userId', findUserByIdController)
-
-app.post('/users', createUserController)
-
-app.post('/todo', createTodoController)
+app.use(userRouter)
+app.use(todoRouter)
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`)
