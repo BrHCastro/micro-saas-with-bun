@@ -13,3 +13,13 @@ content-type: application/json
     "name": "Janne Doe",
     "email": "janne.doe@example.com"
 }
+
+###
+
+POST http://localhost:3333/todo HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Second note!!!",
+    "description": "dolore elit dolor laborum cupidatat do anim adipisicing enim in exercitation cillum"
+}
