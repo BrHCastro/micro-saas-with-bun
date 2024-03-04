@@ -10,23 +10,23 @@ POST http://localhost:3333/users HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Jane Doe",
-    "email": "jane.doe@gmail.com"
+    "name": "Billie Jean",
+    "email": "billie.jean@gmail.com"
 }
 
 ###
 
 POST http://localhost:3333/todos HTTP/1.1
 content-type: application/json
-x-user-id: a928e75d-6d75-4f27-88d2-d154daece1da
+x-user-id: 56732dfd-4ee4-4c57-b760-e26215dc44bb
 
 {
-    "title": "New task added",
-    "description": "dolore elit dolor laborum cupidatat do anim adipisicing enim in exercitation cillum"
+    "title": "Task #6",
+    "description": ""
 }
 
 ###
 
 POST http://localhost:3333/checkout HTTP/1.1
 content-type: application/json
-x-user-id: b16a1fa7-ef9e-41ff-bc95-fefe1fbb4c22
+x-user-id: 56732dfd-4ee4-4c57-b760-e26215dc44bb

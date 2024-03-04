@@ -24,6 +24,13 @@ export async function createTodoController(
   const user = await prisma.user.findUnique({
     select: {
       id: true,
+      stripeSubscriptionId: true,
+      stripeSubscriptionStatus: true,
+      _count: {
+        select: {
+          todos: true,
+        },
+      },
     },
     where: {
       id: header.data['x-user-id'],
@@ -34,6 +41,16 @@ export async function createTodoController(
     return response.status(403).json({ error: 'Forbidden.' })
   }
 
+  const hasCotaAvailable =
+    user.stripeSubscriptionStatus !== 'active' && user._count.todos < 5
+
+  const hasActiveSubscription =
+    user.stripeSubscriptionId && user.stripeSubscriptionStatus === 'active'
+
+  if (!hasCotaAvailable && !hasActiveSubscription) {
+    return response.status(403).json({ error: 'No quota available.' })
+  }
+
   const body = requestBodyParams.safeParse(request.body)
 
   if (body.success === false) {
@@ -42,13 +59,16 @@ export async function createTodoController(
 
   const { title, description } = body.data
 
-  await prisma.todo.create({
+  const newUser = await prisma.todo.create({
     data: {
       userId: user.id,
       title,
       description,
     },
+    select: {
+      title: true,
+    },
   })
 
-  return response.status(201).send()
+  return response.status(201).json(newUser)
 }
